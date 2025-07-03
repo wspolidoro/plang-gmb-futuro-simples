@@ -3,6 +3,8 @@ import { SimulatorHeader } from "@/components/SimulatorHeader";
 import { BusinessDataForm } from "@/components/BusinessDataForm";
 import { RevenueProjection } from "@/components/RevenueProjection";
 import { PersuasiveElements } from "@/components/PersuasiveElements";
+import { UpsellServices } from "@/components/UpsellServices";
+import { CommercialProposal } from "@/components/CommercialProposal";
 
 interface BusinessData {
   businessName: string;
@@ -14,6 +16,9 @@ interface BusinessData {
 const Index = () => {
   const [businessData, setBusinessData] = useState<BusinessData | null>(null);
   const [showResults, setShowResults] = useState(false);
+  const [selectedUpsells, setSelectedUpsells] = useState<string[]>([]);
+  const [additionalImpact, setAdditionalImpact] = useState(0);
+  const [isConsultantMode] = useState(false); // Future: toggle between client/consultant mode
 
   const handleFormSubmit = (data: BusinessData) => {
     setBusinessData(data);
@@ -30,7 +35,21 @@ const Index = () => {
   const handleNewSimulation = () => {
     setBusinessData(null);
     setShowResults(false);
+    setSelectedUpsells([]);
+    setAdditionalImpact(0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleUpsellToggle = (serviceId: string, impact: number) => {
+    setSelectedUpsells(prev => {
+      if (prev.includes(serviceId)) {
+        setAdditionalImpact(prev => prev - impact);
+        return prev.filter(id => id !== serviceId);
+      } else {
+        setAdditionalImpact(prev => prev + impact);
+        return [...prev, serviceId];
+      }
+    });
   };
 
   return (
@@ -53,8 +72,16 @@ const Index = () => {
                   </button>
                 </div>
                 
-                <RevenueProjection businessData={businessData} />
+                <RevenueProjection 
+                  businessData={businessData} 
+                  additionalImpact={additionalImpact}
+                />
                 <PersuasiveElements />
+                <UpsellServices 
+                  onServiceToggle={handleUpsellToggle}
+                  selectedServices={selectedUpsells}
+                />
+                <CommercialProposal businessData={businessData} />
               </>
             )}
           </div>

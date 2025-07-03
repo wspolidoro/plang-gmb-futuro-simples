@@ -13,6 +13,7 @@ interface BusinessData {
 
 interface RevenueProjectionProps {
   businessData: BusinessData;
+  additionalImpact?: number;
 }
 
 interface Scenario {
@@ -23,7 +24,7 @@ interface Scenario {
   icon: React.ReactNode;
 }
 
-export function RevenueProjection({ businessData }: RevenueProjectionProps) {
+export function RevenueProjection({ businessData, additionalImpact = 0 }: RevenueProjectionProps) {
   const [customGrowth, setCustomGrowth] = useState(100);
 
   const currentRevenue = businessData.averageTicket * businessData.monthlyVolume;
@@ -31,28 +32,28 @@ export function RevenueProjection({ businessData }: RevenueProjectionProps) {
   const scenarios: Scenario[] = [
     {
       name: "Cenário Pessimista",
-      growth: 30,
+      growth: 30 + additionalImpact,
       color: "text-warning",
       bgColor: "bg-warning-bg",
       icon: <TrendingUp className="h-5 w-5" />
     },
     {
       name: "Cenário Médio",
-      growth: 50,
+      growth: 50 + additionalImpact,
       color: "text-primary",
       bgColor: "bg-primary/10",
       icon: <Target className="h-5 w-5" />
     },
     {
       name: "Cenário Otimista",
-      growth: 75,
+      growth: 75 + additionalImpact,
       color: "text-success",
       bgColor: "bg-success-bg",
       icon: <TrendingUp className="h-5 w-5" />
     },
     {
       name: "Cenário Personalizado",
-      growth: customGrowth,
+      growth: customGrowth + additionalImpact,
       color: "text-primary-dark",
       bgColor: "bg-gradient-to-r from-primary/5 to-success/5",
       icon: <DollarSign className="h-5 w-5" />
@@ -89,7 +90,7 @@ export function RevenueProjection({ businessData }: RevenueProjectionProps) {
             Projeções de Crescimento
           </CardTitle>
           <p className="text-muted-foreground">
-            Veja o potencial de crescimento com Google Meu Negócio otimizado
+            Veja o que sua empresa pode faturar a mais com o Google trabalhando a seu favor
           </p>
         </CardHeader>
         <CardContent>
@@ -126,12 +127,24 @@ export function RevenueProjection({ businessData }: RevenueProjectionProps) {
                           onChange={(e) => setCustomGrowth(Number(e.target.value))}
                           className="h-10"
                         />
+                        {additionalImpact > 0 && (
+                          <p className="text-xs text-success">
+                            +{additionalImpact}% de serviços adicionais incluído
+                          </p>
+                        )}
                       </div>
                     )}
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className={`text-center p-3 rounded-lg bg-white/50`}>
-                      <p className="text-2xl font-bold text-foreground">+{scenario.growth}%</p>
+                      <p className="text-2xl font-bold text-foreground">
+                        +{scenario.growth}%
+                        {additionalImpact > 0 && (
+                          <span className="text-sm text-success ml-1">
+                            (+{additionalImpact}% extra)
+                          </span>
+                        )}
+                      </p>
                     </div>
                     
                     <div className="space-y-2 text-sm">
