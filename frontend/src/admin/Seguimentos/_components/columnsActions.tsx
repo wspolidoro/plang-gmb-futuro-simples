@@ -10,7 +10,7 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 export default function ColumnsActions({plano}: { plano: any }) {
     const [isOpen, setIsOpen] = useState(false);
       const [load2, setLoad2] = useState(false);
-    /*       fetch('http://localhost:3333/planos/edit', {
+    /*       fetch('https://prop.mktgohub.com.br/planos/edit', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export default function ColumnsActions({plano}: { plano: any }) {
 
     const novaAba = window.open('', '_blank');
 
-    fetch('http://localhost:3333/pdf/' + proposalId)
+    fetch('https://prop.mktgohub.com.br/pdf/' + proposalId)
       .then(response => response.blob())
       .then(blob => {
         setLoad2(false);

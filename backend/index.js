@@ -12,6 +12,8 @@ const dadosRelatorio = require('./ejs/exemplo-dados'); // Importando os dados de
 
 require('dotenv').config();
 
+const masterUrl = process.env.URL_PROD
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -96,7 +98,7 @@ app.get('/pdf/:id', async (req, res) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  await page.goto('http://localhost:3333/template-pdf/' + req.params.id, { waitUntil: 'networkidle0' });
+  await page.goto(masterUrl + '/template-pdf/' + req.params.id, { waitUntil: 'networkidle0' });
 
   const pdf = await page.pdf({
     printBackground: true,

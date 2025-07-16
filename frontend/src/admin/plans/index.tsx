@@ -21,7 +21,7 @@ export default function plans() {
     useEffect(() => {
         document.title = "Planos - Plang";
 
-        fetch('http://localhost:3333/planos')
+        fetch('https://prop.mktgohub.com.br/planos')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {

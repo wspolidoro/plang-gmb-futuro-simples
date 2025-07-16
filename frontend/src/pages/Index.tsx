@@ -44,7 +44,7 @@ const Index = () => {
 
   useEffect(() => {
     if (Object.keys(calculatedData).length < 1) return;
-    fetch('http://localhost:3333/proposal', {
+    fetch('https://prop.mktgohub.com.br/proposal', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ const Index = () => {
   const enviarRelatorio = () => {
     /*  const html = document.getElementById('pdf-content').innerHTML;
    
-     axios.post('http://localhost:3333/gerar-pdf', { html })
+     axios.post('https://prop.mktgohub.com.br/gerar-pdf', { html })
        .then((res) => {
          console.log("Relatório gerado com sucesso", res.data);
          console.log("Relatório enviado")
@@ -122,7 +122,7 @@ const Index = () => {
        .catch(console.error); */
     const html = document.getElementById('pdf-content').innerHTML;
 
-    fetch('http://localhost:3333/gerar-pdf', {
+    fetch('https://prop.mktgohub.com.br/gerar-pdf', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ html })
