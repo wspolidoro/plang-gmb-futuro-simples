@@ -21,7 +21,8 @@ module.exports = {
                 return res.json({ success: true, message: 'Usuário autenticado com sucesso', token: token });
             }
         } catch (err) {
-            console.log(err)
+            console.log(err);
+            return res.json({ success: false, message: err });
         }
 
 
