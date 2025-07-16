@@ -30,7 +30,7 @@ const items = [
     icon: Gem,
   },
   {
-    title: "Seguimentos",
+    title: "Acompanhamento",
     url: "/seguimentos",
     icon: Calendar,
   }
