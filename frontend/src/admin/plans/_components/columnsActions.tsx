@@ -9,7 +9,7 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 export default function ColumnsActions({plano}: { plano: any }) {
     const [isOpen, setIsOpen] = useState(false);
-    /*       fetch('https://prop.mktgohub.com.br/planos/edit', {
+    /*       fetch('https://prop.mktgohub.com.br/api/planos/edit', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

@@ -36,7 +36,7 @@ export default function Login() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
 
-    fetch('https://prop.mktgohub.com.br/auth', {
+    fetch('https://prop.mktgohub.com.br/api/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

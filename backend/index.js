@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('public')); // Serve arquivos estáticos (CSS, imagens etc.)
 
-app.get('/template-pdf/:id', async (req, res) => {
+app.get('/api/template-pdf/:id', async (req, res) => {
   const Proposal = require('./models/table_proposal');
   const Projetions = require('./models/table_projetions');
 
@@ -94,11 +94,11 @@ app.get('/template-pdf/:id', async (req, res) => {
   //res.send('API is running');
 });
 
-app.get('/pdf/:id', async (req, res) => {
+app.get('/api/pdf/:id', async (req, res) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  await page.goto(masterUrl + '/template-pdf/' + req.params.id, { waitUntil: 'networkidle0' });
+  await page.goto(masterUrl + '/api/template-pdf/' + req.params.id, { waitUntil: 'networkidle0' });
 
   const pdf = await page.pdf({
     printBackground: true,

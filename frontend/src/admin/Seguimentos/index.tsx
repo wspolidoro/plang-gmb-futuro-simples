@@ -21,7 +21,7 @@ export default function plans() {
     useEffect(() => {
         document.title = "Seguimentos - Plang";
 
-        fetch('https://prop.mktgohub.com.br/proposal')
+        fetch('https://prop.mktgohub.com.br/api/proposal')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {

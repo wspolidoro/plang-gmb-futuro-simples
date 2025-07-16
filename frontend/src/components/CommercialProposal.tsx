@@ -81,7 +81,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
   ];
 
   useEffect(() => {
-    fetch('https://prop.mktgohub.com.br/planos')
+    fetch('https://prop.mktgohub.com.br/api/planos')
       .then(response => response.json())
       .then(data => {
         if (data.success) {
@@ -124,7 +124,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
   };
 
   function verPdf() {
-    fetch('https://prop.mktgohub.com.br/pdf/' + proposalId)
+    fetch('https://prop.mktgohub.com.br/api/pdf/' + proposalId)
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -137,7 +137,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
   function baixarProposta() {
     setLoad(true)
-    fetch('https://prop.mktgohub.com.br/pdf/' + proposalId)
+    fetch('https://prop.mktgohub.com.br/api/pdf/' + proposalId)
       .then(response => response.blob())
       .then(blob => {
         const url = window.URL.createObjectURL(blob);
@@ -158,7 +158,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
     const novaAba = window.open('', '_blank');
 
-    fetch('https://prop.mktgohub.com.br/pdf/' + proposalId)
+    fetch('https://prop.mktgohub.com.br/api/pdf/' + proposalId)
       .then(response => response.blob())
       .then(blob => {
         setLoad2(false);
@@ -178,7 +178,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
   /*   function verProposta() {
       setLoad2(true)
-      fetch('https://prop.mktgohub.com.br/pdf/' + proposalId)
+      fetch('https://prop.mktgohub.com.br/api/pdf/' + proposalId)
         .then(response => response.blob())
         .then(blob => {
           setLoad2(false);
