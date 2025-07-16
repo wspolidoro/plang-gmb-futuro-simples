@@ -43,16 +43,15 @@ export default function Login() {
       },
       body: JSON.stringify(values)
     })
-      .then(response => response.text())
+      .then(response => response.json())
       .then(data => {
-        console.log('kledisom: ', data)
-    /*     if (data.success) {
+        if (data.success) {
            localStorage.setItem('admin_token', data.token); // Salva um token simples
           console.log('Success:', data);
           navigate('/dashboard');
         } else {
           toast.error('Erro ao fazer login. Verifique suas credenciais e tente novamente.')
-        } */
+        }
       })
 
   }
