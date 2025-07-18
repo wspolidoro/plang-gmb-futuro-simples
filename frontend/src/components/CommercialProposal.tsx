@@ -137,7 +137,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
   function baixarProposta() {
     setLoad(true)
-    fetch('https://prop.mktgohub.com.br/api/pdf/' + proposalId)
+    fetch('https://prop.mktgohub.com.br/api/download/pdf/' + proposalId)
       .then(response => response.blob())
       .then(blob => {
         const url = window.URL.createObjectURL(blob);
@@ -157,8 +157,8 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
     setLoad2(true);
 
     const novaAba = window.open('', '_blank');
-
-    fetch('https://prop.mktgohub.com.br/api/pdf/' + proposalId)
+//https://prop.mktgohub.com.br
+    fetch('https://prop.mktgohub.com.br/api/template-pdf/' + proposalId)
       .then(response => response.blob())
       .then(blob => {
         setLoad2(false);

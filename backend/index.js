@@ -7,6 +7,7 @@ const cors = require('cors');
 const puppeteer = require('puppeteer');
 const ejs = require('ejs');
 const path = require('path');
+const fs = require('fs');
 const pdf = require('html-pdf')
 const dadosRelatorio = require('./ejs/exemplo-dados'); // Importando os dados de exemplo
 
@@ -43,26 +44,26 @@ app.get('/api/template-pdf/:id', async (req, res) => {
     },
   ];
 
-/*    const proposals = await Proposal.findAll({
-    where: {
-      id: req.params.id
-    },
-    include: [{
-      model: Projetions,
-      as: 'projections'
-    }]
-  });
-
-  <!-- <pre><%= JSON.stringify(proposals, null, 2) %></pre> --> */
+  /*    const proposals = await Proposal.findAll({
+      where: {
+        id: req.params.id
+      },
+      include: [{
+        model: Projetions,
+        as: 'projections'
+      }]
+    });
+  
+    <!-- <pre><%= JSON.stringify(proposals, null, 2) %></pre> --> */
 
   //console.log(await dadosRelatorio(23)) 
 
   ejs.renderFile(
     path.join(__dirname, 'ejs', 'print.ejs'),
-     {
-    dadosRelatorio: await dadosRelatorio(req.params.id),
-    //proposals: proposals[0].dataValues
-  }, (err, html) => {
+    {
+      dadosRelatorio: await dadosRelatorio(req.params.id),
+      //proposals: proposals[0].dataValues
+    }, (err, html) => {
       if (err) {
         console.log(err)
         return res.send('Erro na leitura do arquivo')
@@ -72,10 +73,10 @@ app.get('/api/template-pdf/:id', async (req, res) => {
         height: "11.25in",
         width: "8.3in",
         header: {
-          height: "20mm",
+          height: "10mm",
         },
         footer: {
-          height: "20mm",
+          height: "10mm",
         }
       }
 
@@ -92,6 +93,64 @@ app.get('/api/template-pdf/:id', async (req, res) => {
   )
 
   //res.send('API is running');
+});
+
+// Suponha que os arquivos PDF estejam em uma pasta específica
+const pdfDirectory = path.join(__dirname, 'ejs');
+
+app.get('/api/download/pdf/:id', async (req, res) => {
+  const proposalId = "relatorio";
+
+  ejs.renderFile(
+    path.join(__dirname, 'ejs', 'print.ejs'),
+    {
+      dadosRelatorio: await dadosRelatorio(req.params.id),
+      //proposals: proposals[0].dataValues
+    }, (err, html) => {
+      if (err) {
+        console.log(err)
+        return res.send('Erro na leitura do arquivo')
+      }
+
+      const options = {
+        height: "11.25in",
+        width: "8.3in",
+        header: {
+          height: "10mm",
+        },
+        footer: {
+          height: "10mm",
+        }
+      }
+
+      //criar o PDF
+      pdf.create(html, options).toBuffer((err, buffer) => {
+        if (err) return console.log(err);
+        console.log(res); // { filename: '/app/businesscard.pdf' }
+
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=relatorio.pdf');
+        res.send(buffer);
+
+      });
+
+    }
+  )
+
+  /*   // Caminho completo do PDF
+    const filePath = path.join(pdfDirectory, `${proposalId}.pdf`);
+  
+    // Verifica se o arquivo existe
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+      if (err) {
+        return res.status(404).json({ error: 'PDF não encontrado.' });
+      }
+  
+      // Define o tipo do conteúdo e envia o arquivo
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename="${proposalId}.pdf"`);
+      fs.createReadStream(filePath).pipe(res);
+    }); */
 });
 
 app.get('/api/pdf/:id', async (req, res) => {

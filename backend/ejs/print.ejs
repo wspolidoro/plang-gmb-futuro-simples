@@ -471,21 +471,62 @@
 
         @media print {
             .scenario-pessimista {
+                margin-top: 10rem;
+                margin-bottom: 5rem;
+            }
+
+            .scenario-otimista {
+                margin-top: 10rem;
+                margin-bottom: 2rem;
+            }
+
+            .ranking-section {
+                margin-top: 0rem;
+            }
+
+            .reviews-section {
+                margin-bottom: 20rem;
+            }
+
+            .impact-grid {
+                margin-bottom: 3rem;
+            }
+
+            .profile-card {
+                padding: 0.5rem;
+            }
+
+            .profile-comum {
+                margin-bottom: 2rem;
+            }
+
+            .cta-section {
                 margin-bottom: 10rem;
             }
-            .profile-comum {
-                margin-bottom: 15rem;
+
+            .service-item {
+                margin-bottom: 5rem;
             }
+
+            .plan-card {
+                padding: 0.5rem;
+            }
+
             .plan-popular {
-                margin-bottom: 15rem;
+                margin-top: 2rem;
+                margin-bottom: 5rem;
+            }
+
+            footer {
+                margin-top: -25px;
             }
         }
     </style>
-   <!--  <link rel="stylesheet" href="http://localhost:3333/globalEjs.css"> -->
+    <!--  <link rel="stylesheet" href="http://localhost:3333/globalEjs.css"> -->
 </head>
 
 <body>
-    
+
 
     <div class="container">
         <!-- Header -->
@@ -508,11 +549,12 @@
             <!-- Situação Atual -->
             <div class="current-situation">
                 <h3>Situação Atual</h3>
-                <div class="current-revenue">R$ <%= String(dadosRelatorio.receitaAtual).toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                <div class="current-revenue">R$ <%= String(dadosRelatorio.receitaAtual).toLocaleString('pt-BR',
+                        {minimumFractionDigits: 2}) %>
                         /mês</div>
                 <p>
-                    <%= dadosRelatorio.vendasAtuais %> vendas × R$ <%= dadosRelatorio.ticketMedio.toLocaleString('pt-BR', {minimumFractionDigits: 2})
-                            %>
+                    <%= dadosRelatorio.vendasAtuais %> vendas × R$ <%=
+                            dadosRelatorio.ticketMedio.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
                 </p>
             </div>
 
@@ -528,13 +570,16 @@
                             <%= dadosRelatorio.cenarios.pessimista.novasVendas %> vendas
                         </p>
                         <p><strong>Nova receita mensal:</strong> R$ <%=
-                                dadosRelatorio.cenarios.pessimista.novaReceita.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.pessimista.novaReceita.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                         <p><strong>Receita extra/mês:</strong> R$ <%=
-                                dadosRelatorio.cenarios.pessimista.receitaExtra.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.pessimista.receitaExtra.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                         <p><strong>Extra em 12 meses:</strong> R$ <%=
-                                dadosRelatorio.cenarios.pessimista.extraAnual.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.pessimista.extraAnual.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                     </div>
                 </div>
@@ -549,13 +594,16 @@
                             <%= dadosRelatorio.cenarios.medio.novasVendas %> vendas
                         </p>
                         <p><strong>Nova receita mensal:</strong> R$ <%=
-                                dadosRelatorio.cenarios.medio.novaReceita.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.medio.novaReceita.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                         <p><strong>Receita extra/mês:</strong> R$ <%=
-                                dadosRelatorio.cenarios.medio.receitaExtra.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
-                        </p>
-                        <p><strong>Extra em 12 meses:</strong> R$ <%= dadosRelatorio.cenarios.medio.extraAnual.toLocaleString('pt-BR',
+                                dadosRelatorio.cenarios.medio.receitaExtra.toLocaleString('pt-BR',
                                 {minimumFractionDigits: 2}) %>
+                        </p>
+                        <p><strong>Extra em 12 meses:</strong> R$ <%=
+                                dadosRelatorio.cenarios.medio.extraAnual.toLocaleString('pt-BR', {minimumFractionDigits:
+                                2}) %>
                         </p>
                     </div>
                 </div>
@@ -570,13 +618,16 @@
                             <%= dadosRelatorio.cenarios.otimista.novasVendas %> vendas
                         </p>
                         <p><strong>Nova receita mensal:</strong> R$ <%=
-                                dadosRelatorio.cenarios.otimista.novaReceita.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.otimista.novaReceita.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                         <p><strong>Receita extra/mês:</strong> R$ <%=
-                                dadosRelatorio.cenarios.otimista.receitaExtra.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.otimista.receitaExtra.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                         <p><strong>Extra em 12 meses:</strong> R$ <%=
-                                dadosRelatorio.cenarios.otimista.extraAnual.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.otimista.extraAnual.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                     </div>
                 </div>
@@ -600,15 +651,16 @@
                             <%= dadosRelatorio.cenarios.personalizado.novasVendas %> vendas
                         </p>
                         <p><strong>Nova receita mensal:</strong> R$ <%=
-                                dadosRelatorio.cenarios.personalizado.novaReceita.toLocaleString('pt-BR', {minimumFractionDigits: 2})
-                                %>
+                                dadosRelatorio.cenarios.personalizado.novaReceita.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                         <p><strong>Receita extra/mês:</strong> R$ <%=
-                                dadosRelatorio.cenarios.personalizado.receitaExtra.toLocaleString('pt-BR', {minimumFractionDigits: 2})
-                                %>
+                                dadosRelatorio.cenarios.personalizado.receitaExtra.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                         <p><strong>Extra em 12 meses:</strong> R$ <%=
-                                dadosRelatorio.cenarios.personalizado.extraAnual.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
+                                dadosRelatorio.cenarios.personalizado.extraAnual.toLocaleString('pt-BR',
+                                {minimumFractionDigits: 2}) %>
                         </p>
                     </div>
                 </div>
@@ -780,7 +832,7 @@
                                 <% if (servico.precoOriginal && servico.precoOriginal !==servico.preco) { %>
                                     <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">R$ <%=
                                             servico.precoOriginal.toLocaleString('pt-BR', {minimumFractionDigits: 2}) %>
-                                            </span><br>
+                                    </span><br>
                                     <% } %>
                                         <% if (servico.preco==='Sob consulta' ) { %>
                                             <%= servico.preco %>
@@ -839,7 +891,7 @@
                     <% }); %>
             </div>
 
-            <div style="text-align: center; margin-top: 2rem;">
+            <div style="text-align: center;">
                 <p><strong>Planos selecionados:</strong></p>
                 <% dadosRelatorio.planos.forEach(function(plano) { %>
                     <% if (plano.selecionado) { %>
@@ -849,7 +901,7 @@
                         <% } %>
                             <% }); %>
 
-                                <div style="margin-top: 2rem;">
+                                <div>
                                     <a href="#" class="btn btn-primary">Solicitar Proposta por E-mail</a>
                                     <a href="#" class="btn btn-secondary">Baixar Proposta em PDF</a>
                                     <a href="#" class="btn btn-secondary">Visualizar Proposta</a>
