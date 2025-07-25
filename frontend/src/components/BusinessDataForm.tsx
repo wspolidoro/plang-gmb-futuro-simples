@@ -49,14 +49,12 @@ export function BusinessDataForm({ onSubmit }: BusinessDataFormProps) {
     }
   };
 
-  const formatCurrency = (value: string) => {
-    const number = value.replace(/\D/g, "");
-    const formatted = (Number(number) / 100).toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    });
-    return formatted;
-  };
+  const formatCurrency = (value: number) => {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+};
 
   const handleTicketChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, "");
@@ -102,7 +100,7 @@ export function BusinessDataForm({ onSubmit }: BusinessDataFormProps) {
               id="averageTicket"
               type="text"
               placeholder="R$ 0,00"
-              value={formData.averageTicket > 0 ? formatCurrency((formData.averageTicket * 100).toString()) : ""}
+              value={formData.averageTicket > 0 ? formatCurrency(formData.averageTicket) : ""}
               onChange={handleTicketChange}
               className="h-12"
               required
