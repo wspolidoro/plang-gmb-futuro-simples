@@ -6,6 +6,7 @@ import { PersuasiveElements } from "@/components/PersuasiveElements";
 import { UpsellServices } from "@/components/UpsellServices";
 import { CommercialProposal } from "@/components/CommercialProposal";
 
+
 import html2canvas from 'html2canvas';
 import axios from 'axios';
 import generatePDF, { Margin, Resolution } from 'react-to-pdf';

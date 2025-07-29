@@ -10,6 +10,7 @@ import Dashboard from "./admin/dashboard";
 import Plans from "./admin/plans";
 import Layout from "./admin/Layout";
 
+
 import { ProtectedRoute } from "@/admin/_components/ProtectedRoute";
 import Seguimentos from "./admin/Seguimentos";
 
