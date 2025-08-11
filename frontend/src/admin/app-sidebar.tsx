@@ -1,4 +1,4 @@
-import { Calendar, ChevronUp, Gem, Home, Inbox, Search, Settings, User2 } from "lucide-react"
+import { Calendar, ChevronUp, Gem, Home, Inbox, LogOut, Search, Settings, User2 } from "lucide-react"
 
 import {
   Sidebar,
@@ -14,7 +14,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 // Menu items.
@@ -36,11 +36,20 @@ const items = [
   }
 ]
 
+
+
 export function AppSidebar() {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("admin_token");
+    navigate("/login");
+  }
+
   return (
     <Sidebar>
       <SidebarHeader className="border-b p-4">
-        <img src="/logo.webp" alt="ZiiZ"  height={28} />
+        <img src="/logo.webp" alt="ZiiZ" height={28} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -60,7 +69,7 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-       {/*  <SidebarGroup>
+        {/*  <SidebarGroup>
           <SidebarGroupLabel>Outros</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -90,7 +99,7 @@ export function AppSidebar() {
                   </Avatar>
                   <div>
                     <p className="text-sm">
-                     {/*  {session.data?.user?.clinic?.name} */}
+                      {/*  {session.data?.user?.clinic?.name} */}
                     </p>
                     <p className="text-muted-foreground text-sm">
                       {/* {session.data?.user.email} */}
@@ -99,10 +108,10 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-              {/*   <DropdownMenuItem onClick={handleSignOut}>
+                <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut />
                   Sair
-                </DropdownMenuItem> */}
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>

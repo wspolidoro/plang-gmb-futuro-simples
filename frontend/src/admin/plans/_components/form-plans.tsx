@@ -34,7 +34,7 @@ export function FormPlans({ plano }: { plano: any }) {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
 
-         fetch('https://prop.mktgohub.com.br/api/planos/' + plano.id, {
+         fetch(`${import.meta.env.VITE_URL_PROD}/api/planos/${plano.id}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',

@@ -35,7 +35,7 @@ export default function ColumnsActions({plano}: { plano: any }) {
 
     const novaAba = window.open('', '_blank');
 
-    fetch('https://prop.mktgohub.com.br/api/template-pdf/' + proposalId)
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/template-pdf/${proposalId}`)
       .then(response => response.blob())
       .then(blob => {
         setLoad2(false);

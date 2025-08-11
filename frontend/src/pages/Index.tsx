@@ -45,7 +45,7 @@ const Index = () => {
 
   useEffect(() => {
     if (Object.keys(calculatedData).length < 1) return;
-    fetch('https://prop.mktgohub.com.br/api/proposal', {
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/proposal`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ const Index = () => {
        .catch(console.error); */
     const html = document.getElementById('pdf-content').innerHTML;
 
-    fetch('https://prop.mktgohub.com.br/api/gerar-pdf', {
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/gerar-pdf`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ html })

@@ -22,7 +22,7 @@ export default function plans() {
     const [data, setData] = useState<any>([]);
     useEffect(() => {
         document.title = "Planos - Plang";
-
+console.log(import.meta.env.VITE_URL_PROD)
          fetch(`${import.meta.env.VITE_URL_PROD}/api/planos`)
             .then(response => response.json())
             .then(data => {

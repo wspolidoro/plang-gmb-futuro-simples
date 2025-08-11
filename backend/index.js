@@ -153,6 +153,62 @@ app.get('/api/download/pdf/:id', async (req, res) => {
     }); */
 });
 
+app.post('/api/email/pdf/:id', async (req, res) => {
+  const proposalId = "relatorio";
+
+  ejs.renderFile(
+    path.join(__dirname, 'ejs', 'print.ejs'),
+    {
+      dadosRelatorio: await dadosRelatorio(req.params.id),
+      //proposals: proposals[0].dataValues
+    }, (err, html) => {
+      if (err) {
+        console.log(err)
+        return res.send('Erro na leitura do arquivo')
+      }
+
+      const options = {
+        height: "11.25in",
+        width: "8.3in",
+        header: {
+          height: "10mm",
+        },
+        footer: {
+          height: "10mm",
+        }
+      }
+
+      //criar o PDF
+      pdf.create(html, options).toBuffer((err, buffer) => {
+        if (err) return console.log(err);
+        console.log(res); // { filename: '/app/businesscard.pdf' }
+
+        /* res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=relatorio.pdf');
+        res.send(buffer);
+ */
+
+        fetch(process.env.URL_N8N, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            //'Content-Disposition': 'attachment; filename=relatorio.pdf'
+          },
+          body: JSON.stringify({ pdf: buffer.toString('base64'), clientName: req.body.clientName, clientEmail: req.body.clientEmail })
+        })
+          .then(x => x.json())
+          .then(response => {
+            console.log('PDF enviado com sucesso:', response);
+            res.json({ success: true, message: 'PDF enviado com sucesso!' });
+          })
+
+
+      });
+
+    }
+  )
+});
+
 app.get('/api/pdf/:id', async (req, res) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();

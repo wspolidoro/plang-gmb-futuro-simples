@@ -218,7 +218,7 @@ export function PersuasiveElements() {
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-white text-white hover:bg-white/10 font-semibold"
+              className="border-white text-primary hover:bg-white/10 font-semibold ml-2"
             >
               💬 Falar com Especialista no WhatsApp
             </Button>

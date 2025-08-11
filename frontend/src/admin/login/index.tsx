@@ -13,7 +13,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "../../components/ui/form"
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +36,7 @@ export default function Login() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
 
-    fetch('https://prop.mktgohub.com.br/api/auth', {
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

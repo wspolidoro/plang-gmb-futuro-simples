@@ -81,7 +81,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
   ];
 
   useEffect(() => {
-    fetch('https://prop.mktgohub.com.br/api/planos')
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/planos`)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
@@ -119,12 +119,31 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
   const sendProposal = () => {
     // Aqui seria implementada a lógica de envio
+
+     fetch(`${import.meta.env.VITE_URL_PROD}/api/email/pdf/${proposalId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        clientName,
+        clientEmail
+      })
+     })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        if (data.success) {
+            alert('Proposta enviada com sucesso!');
+        }
+      })
+
     console.log("Enviando proposta para:", clientEmail);
     setShowEmailForm(false);
   };
 
   function verPdf() {
-    fetch('https://prop.mktgohub.com.br/api/pdf/' + proposalId)
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/pdf/${proposalId}`)
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -137,7 +156,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
   function baixarProposta() {
     setLoad(true)
-    fetch('https://prop.mktgohub.com.br/api/download/pdf/' + proposalId)
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/download/pdf/${proposalId}`)
       .then(response => response.blob())
       .then(blob => {
         const url = window.URL.createObjectURL(blob);
@@ -158,7 +177,7 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
     const novaAba = window.open('', '_blank');
 //https://prop.mktgohub.com.br
-    fetch('https://prop.mktgohub.com.br/api/template-pdf/' + proposalId)
+    fetch(`${import.meta.env.VITE_URL_PROD}/api/template-pdf/${proposalId}`)
       .then(response => response.blob())
       .then(blob => {
         setLoad2(false);
@@ -270,10 +289,10 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
 
               {!showEmailForm ? (
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  {/*   <Button onClick={handleEmailRequest} className="flex items-center gap-2">
+                  <Button onClick={handleEmailRequest} className="flex items-center gap-2">
                     <Mail className="h-4 w-4" />
                     Solicitar Proposta por E-mail
-                  </Button> */}
+                  </Button>
                   <Button variant="outline" className="flex items-center gap-2" onClick={baixarProposta}>
                     {load ? <Loader2 className="animate-spin" /> : <Download className="h-4 w-4" />}
 
@@ -281,7 +300,6 @@ export function CommercialProposal({ businessData, proposalId }: CommercialPropo
                   </Button>
                   <Button variant="outline" className="flex items-center gap-2" onClick={verProposta}>
                     {load2 ? <Loader2 className="animate-spin" /> : <Eye className="h-4 w-4" />}
-
                     Visualizar Proposta
                   </Button>
                 </div>

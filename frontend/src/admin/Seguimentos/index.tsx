@@ -21,7 +21,7 @@ export default function plans() {
     useEffect(() => {
         document.title = "Seguimentos - Plang";
 
-        fetch('https://prop.mktgohub.com.br/api/proposal')
+        fetch(`${import.meta.env.VITE_URL_PROD}/api/proposal`)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
